@@ -1,0 +1,19 @@
+# Java
+*.class
+
+# Eclipse IDE
+.settings/
+bin/
+.classpath
+.project
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# Other Files
+Backup/

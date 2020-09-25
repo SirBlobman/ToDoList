@@ -1,0 +1,15 @@
+# Configuration File for ${bukkit.plugin.prefix}
+# Made by ${bukkit.plugin.author} for v${bukkit.plugin.version}
+
+# The global to-do list can be found in 'global.yml'
+global-list:
+  # What permission is needed to view the global to-do list?
+  view-permission: "to-do.list.global.view"
+  
+  # What permission is needed to modify the global to-do list?
+  edit-permission: "to-do.list.global.modify"
+  
+# How often should players be reminded of the tasks on the to-do list?
+# Time is in ticks (Default is 6,000 ticks = 300 seconds = 5 minutes)
+reminder-ticks: 6000
+  

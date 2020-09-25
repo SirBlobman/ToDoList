@@ -1,0 +1,22 @@
+error:
+  not-player: "&cOnly players can execute this command."
+  no-permission: "&cYou do not have access to that feature."
+  invalid-integer: "&7{value}&c is not a valid number."
+  number-too-small: "&7{value}&c cannot be less than zero."
+  number-too-big: "You do not have &7{value}&7 task(s)."
+
+to-do-list:
+  command-help:
+    - "&6&lTo-Do List Command Usage:"
+    - "&e/to-do-list help&7: View this help page."
+    - "&e/to-do-list reload&7: Reload the configuration files."
+    - "&e/to-do-list list global/self&7: View a list of tasks you need to complete."
+    - "&e/to-do-list add global/self <task...>&7: Add a new task to a to-do list."
+    - "&e/to-do-list complete global/self <number>&7: Complete and remove a task from a to-do list."
+
+  title-format: "&1&lTo-Do List:"
+  task-format: "&e{number}. &7{task}"
+  empty-list: "&cYou do not have any tasks available."
+  add-task: "&aSuccessfully added &7'{task}&7'&a to the to-do list."
+  complete-task: "&aSuccessfully completed task &7'{task}&7'&a."
+  reload-success: "&aSuccessfully reloaded the configuration files for To-Do List."

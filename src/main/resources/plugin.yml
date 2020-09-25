@@ -1,0 +1,32 @@
+name: "${bukkit.plugin.name}"
+prefix: "${bukkit.plugin.prefix}"
+description: "${bukkit.plugin.description}"
+website: "https://www.spigotmc.org/resources/61183/"
+
+main: "${bukkit.plugin.main}"
+version: "${bukkit.plugin.version}"
+api-version: "1.13"
+
+depend:
+  - "SirBlobmanCore"
+
+authors:
+  - "${bukkit.plugin.author}"
+
+commands:
+  to-do-list:
+    description: "Main command for the To-Do List plugin."
+    permission: "to-do-list.command.to-do-list"
+    usage: "/<command> help"
+    aliases:
+      - "todo"
+      - "tdlist"
+      - "todolist"
+      - "tdolist"
+      - "todlist"
+      - "whatdoido"
+
+permissions:
+  to-do-list.command.to-do-list:
+    description: "Access to the '/to-do-list' command."
+    default: op
