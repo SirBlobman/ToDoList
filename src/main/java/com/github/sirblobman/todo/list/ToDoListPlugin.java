@@ -1,11 +1,11 @@
-package com.SirBlobman.todo.list;
+package com.github.sirblobman.todo.list;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.SirBlobman.api.configuration.ConfigurationManager;
-import com.SirBlobman.api.configuration.PlayerDataManager;
-import com.SirBlobman.api.language.LanguageManager;
-import com.SirBlobman.todo.list.command.CommandToDoList;
+import com.github.sirblobman.api.configuration.ConfigurationManager;
+import com.github.sirblobman.api.configuration.PlayerDataManager;
+import com.github.sirblobman.api.language.LanguageManager;
+import com.github.sirblobman.todo.list.command.CommandToDoList;
 
 public final class ToDoListPlugin extends JavaPlugin {
     private final ConfigurationManager configurationManager;
