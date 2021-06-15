@@ -21,13 +21,17 @@ import com.github.sirblobman.api.language.Replacer;
 import com.github.sirblobman.api.utility.MessageUtility;
 import com.github.sirblobman.todo.list.ToDoListPlugin;
 
+import org.jetbrains.annotations.NotNull;
+
 public class CommandToDoList extends Command {
     private final ToDoListPlugin plugin;
+
     public CommandToDoList(ToDoListPlugin plugin) {
         super(plugin, "to-do-list");
         this.plugin = plugin;
     }
 
+    @NotNull
     @Override
     public LanguageManager getLanguageManager() {
         return this.plugin.getLanguageManager();
@@ -53,7 +57,8 @@ public class CommandToDoList extends Command {
             String sub = args[0].toLowerCase();
             if(sub.equals("add")) return Collections.singletonList("Type your task here.");
             if(sub.equals("complete")) {
-                Set<String> valueSet = IntStream.rangeClosed(1, 10).sorted().boxed().map(Object::toString).collect(Collectors.toSet());
+                Set<String> valueSet = IntStream.rangeClosed(1, 10).mapToObj(Integer::toString)
+                        .collect(Collectors.toSet());
                 return getMatching(valueSet, args[2]);
             }
         }
@@ -288,7 +293,8 @@ public class CommandToDoList extends Command {
             String task = taskList.get(index);
             String taskColored = MessageUtility.color(task);
             
-            String taskFormatted = taskFormat.replace("{number}", numberString).replace("{task}", taskColored);
+            String taskFormatted = taskFormat.replace("{number}", numberString)
+                    .replace("{task}", taskColored);
             messageList.add(taskFormatted);
         }
         

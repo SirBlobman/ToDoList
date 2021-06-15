@@ -12,4 +12,3 @@ global-list:
 # How often should players be reminded of the tasks on the to-do list?
 # Time is in ticks (Default is 6,000 ticks = 300 seconds = 5 minutes)
 reminder-ticks: 6000
-  
