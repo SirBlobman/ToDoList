@@ -13,19 +13,27 @@ public final class ToDoListPlugin extends ConfigurablePlugin {
         configurationManager.saveDefault("global.yml");
 
         LanguageManager languageManager = getLanguageManager();
-        languageManager.saveDefaultLanguages();
+        languageManager.saveDefaultLanguageFiles();
     }
 
     @Override
     public void onEnable() {
-        LanguageManager languageManager = getLanguageManager();
-        languageManager.reloadLanguages();
-
+        reloadConfiguration();
         new CommandToDoList(this).register();
     }
 
     @Override
     public void onDisable() {
         // Do Nothing
+    }
+
+    @Override
+    protected void reloadConfiguration() {
+        ConfigurationManager configurationManager = getConfigurationManager();
+        configurationManager.reload("config.yml");
+        configurationManager.reload("global.yml");
+
+        LanguageManager languageManager = getLanguageManager();
+        languageManager.reloadLanguageFiles();
     }
 }
