@@ -36,12 +36,12 @@ public final class SubCommandComplete extends Command {
 
     @Override
     protected List<String> onTabComplete(CommandSender sender, String[] args) {
-        if(args.length == 1) {
+        if (args.length == 1) {
             List<String> valueList = Arrays.asList("global", "self");
             return getMatching(args[0], valueList);
         }
 
-        if(args.length == 2) {
+        if (args.length == 2) {
             return Collections.singletonList("1");
         }
 
@@ -50,32 +50,32 @@ public final class SubCommandComplete extends Command {
 
     @Override
     protected boolean execute(CommandSender sender, String[] args) {
-        if(args.length < 2) {
+        if (args.length < 2) {
             return false;
         }
 
         String indexString = args[1];
         BigInteger indexBig = parseInteger(sender, indexString);
-        if(indexBig == null) {
+        if (indexBig == null) {
             return true;
         }
 
         int index = (indexBig.intValue() - 1);
-        if(index < 0) {
+        if (index < 0) {
             Replacer replacer = new SimpleReplacer("{value}", args[1]);
             sendMessage(sender, "error.number-too-small", replacer);
             return true;
         }
 
         String sub = args[0].toLowerCase(Locale.US);
-        if(sub.equals("global")) {
-            if(!checkPermission(sender, getGlobalEditPermission(), true)) {
+        if (sub.equals("global")) {
+            if (!checkPermission(sender, getGlobalEditPermission(), true)) {
                 return true;
             }
 
             List<String> globalToDoList = getGlobalToDoList();
             int globalToDoListSize = globalToDoList.size();
-            if(index >= globalToDoListSize) {
+            if (index >= globalToDoListSize) {
                 Replacer replacer = new SimpleReplacer("{value}", args[1]);
                 sendMessage(sender, "error.number-too-big", replacer);
                 return true;
@@ -89,8 +89,8 @@ public final class SubCommandComplete extends Command {
             return true;
         }
 
-        if(sub.equals("self")) {
-            if(!(sender instanceof Player)) {
+        if (sub.equals("self")) {
+            if (!(sender instanceof Player)) {
                 sendMessage(sender, "error.not-player", null);
                 return true;
             }
@@ -98,7 +98,7 @@ public final class SubCommandComplete extends Command {
             Player player = (Player) sender;
             List<String> selfToDoList = getSelfToDoList(player);
             int selfToDoListSize = selfToDoList.size();
-            if(index >= selfToDoListSize) {
+            if (index >= selfToDoListSize) {
                 Replacer replacer = new SimpleReplacer("{value}", args[1]);
                 sendMessage(sender, "error.number-too-big", replacer);
                 return true;
@@ -135,18 +135,18 @@ public final class SubCommandComplete extends Command {
         return config.getStringList("to-do-list");
     }
 
-    private List<String> getSelfToDoList(Player player) {
-        PlayerDataManager playerDataManager = this.plugin.getPlayerDataManager();
-        YamlConfiguration data = playerDataManager.get(player);
-        return data.getStringList("to-do-list");
-    }
-
     private void setGlobalToDoList(List<String> taskList) {
         YamlConfiguration config = getGlobalConfiguration();
         config.set("to-do-list", taskList);
 
         ConfigurationManager configurationManager = this.plugin.getConfigurationManager();
         configurationManager.save("global.yml");
+    }
+
+    private List<String> getSelfToDoList(Player player) {
+        PlayerDataManager playerDataManager = this.plugin.getPlayerDataManager();
+        YamlConfiguration data = playerDataManager.get(player);
+        return data.getStringList("to-do-list");
     }
 
     private void setSelfToDoList(Player player, List<String> taskList) {

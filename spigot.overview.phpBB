@@ -1,12 +1,12 @@
 [SIZE=5][B]Supported Spigot Versions:[/B][/SIZE]
-1.8.8, 1.12.2, 1.16.5, 1.18.2, 1.19
+1.8.8, 1.12.2, 1.16.5, 1.18.2, 1.19.2
 
 [SIZE=5][B][COLOR=#FF0000]Description:[/COLOR][/B][/SIZE]
 To-Do List is a plugin that lets you keep a list of things you need to do.
 
 [SIZE=5][B][COLOR=#FF0000]Dependencies:[/COLOR][/B][/SIZE]
 [LIST]
-[*][URL='https://www.spigotmc.org/resources/83189/']SirBlobmanCore[/URL]
+[*][URL='https://www.spigotmc.org/resources/83189/']BlueSlimeCore[/URL]
 [/LIST]
 
 [SIZE=5][B][COLOR=#FF0000]Commands:[/COLOR][/B][/SIZE]
@@ -27,7 +27,8 @@ To-Do List is a plugin that lets you keep a list of things you need to do.
 If you need help with To-Do List, there are multiple ways to contact me.
 If you wish to stay on SpigotMC, you can post a message on the discussion page or send me a direct message.
 You can also post an issue on the GitHub page for this project.
-However, The fastest way to get support is through my Discord server. You can join by clicking the image below:
+
+The fastest way to get support is through my Discord server. You can join by clicking the image below:
 [URL='https://discord.gg/XMq2agT'][IMG]https://discordapp.com/assets/fc0b01fe10a0b8c602fb0106d8189d9b.png[/IMG][/URL]
 
 [SIZE=5][B][COLOR=#FF0000]Extra Information:[/COLOR][/B][/SIZE]

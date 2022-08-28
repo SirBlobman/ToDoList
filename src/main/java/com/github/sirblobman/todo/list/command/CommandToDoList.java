@@ -23,7 +23,7 @@ public final class CommandToDoList extends Command {
     public List<String> onTabComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
     }
-    
+
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         sendMessage(sender, "to-do-list.command-help", null);

@@ -35,12 +35,12 @@ public final class SubCommandAdd extends Command {
 
     @Override
     protected List<String> onTabComplete(CommandSender sender, String[] args) {
-        if(args.length == 1) {
+        if (args.length == 1) {
             List<String> valueList = Arrays.asList("global", "self");
             return getMatching(args[0], valueList);
         }
 
-        if(args.length == 2) {
+        if (args.length == 2) {
             return Collections.singletonList("task...");
         }
 
@@ -49,14 +49,14 @@ public final class SubCommandAdd extends Command {
 
     @Override
     protected boolean execute(CommandSender sender, String[] args) {
-        if(args.length < 2) {
+        if (args.length < 2) {
             return false;
         }
 
         String sub = args[0].toLowerCase(Locale.US);
         String newItem = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
-        if(sub.equals("global")) {
-            if(!checkPermission(sender, getGlobalEditPermission(), true)) {
+        if (sub.equals("global")) {
+            if (!checkPermission(sender, getGlobalEditPermission(), true)) {
                 return true;
             }
 
@@ -69,8 +69,8 @@ public final class SubCommandAdd extends Command {
             return true;
         }
 
-        if(sub.equals("self")) {
-            if(!(sender instanceof Player)) {
+        if (sub.equals("self")) {
+            if (!(sender instanceof Player)) {
                 LanguageManager languageManager = getLanguageManager();
                 languageManager.sendMessage(sender, "error.not-player", null);
                 return true;
@@ -109,18 +109,18 @@ public final class SubCommandAdd extends Command {
         return config.getStringList("to-do-list");
     }
 
-    private List<String> getSelfToDoList(Player player) {
-        PlayerDataManager playerDataManager = this.plugin.getPlayerDataManager();
-        YamlConfiguration data = playerDataManager.get(player);
-        return data.getStringList("to-do-list");
-    }
-
     private void setGlobalToDoList(List<String> taskList) {
         YamlConfiguration config = getGlobalConfiguration();
         config.set("to-do-list", taskList);
 
         ConfigurationManager configurationManager = this.plugin.getConfigurationManager();
         configurationManager.save("global.yml");
+    }
+
+    private List<String> getSelfToDoList(Player player) {
+        PlayerDataManager playerDataManager = this.plugin.getPlayerDataManager();
+        YamlConfiguration data = playerDataManager.get(player);
+        return data.getStringList("to-do-list");
     }
 
     private void setSelfToDoList(Player player, List<String> taskList) {

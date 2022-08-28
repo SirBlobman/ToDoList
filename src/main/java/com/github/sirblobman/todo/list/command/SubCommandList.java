@@ -38,7 +38,7 @@ public final class SubCommandList extends Command {
 
     @Override
     protected List<String> onTabComplete(CommandSender sender, String[] args) {
-        if(args.length == 1) {
+        if (args.length == 1) {
             List<String> valueList = Arrays.asList("global", "self");
             return getMatching(args[0], valueList);
         }
@@ -48,13 +48,13 @@ public final class SubCommandList extends Command {
 
     @Override
     protected boolean execute(CommandSender sender, String[] args) {
-        if(args.length < 1) {
+        if (args.length < 1) {
             return false;
         }
 
         String sub = args[0].toLowerCase(Locale.US);
-        if(sub.equals("global")) {
-            if(!checkPermission(sender, getGlobalViewPermission(), true)) {
+        if (sub.equals("global")) {
+            if (!checkPermission(sender, getGlobalViewPermission(), true)) {
                 return true;
             }
 
@@ -63,8 +63,8 @@ public final class SubCommandList extends Command {
             return true;
         }
 
-        if(sub.equals("self")) {
-            if(!(sender instanceof Player)) {
+        if (sub.equals("self")) {
+            if (!(sender instanceof Player)) {
                 sendMessage(sender, "error.not-player", null);
                 return true;
             }
@@ -105,7 +105,7 @@ public final class SubCommandList extends Command {
     }
 
     private void sendToDoList(CommandSender sender, List<String> taskList) {
-        if(taskList.isEmpty()) {
+        if (taskList.isEmpty()) {
             sendMessage(sender, "to-do-list.empty-list", null);
             return;
         }
@@ -119,7 +119,7 @@ public final class SubCommandList extends Command {
 
         int taskListSize = taskList.size();
         String taskFormat = languageManager.getMessageString(sender, "to-do-list.task-format", null);
-        for(int index = 0; index < taskListSize; index++) {
+        for (int index = 0; index < taskListSize; index++) {
             String numberString = Integer.toString(index + 1);
             String task = taskList.get(index);
             String fixTask = fixTask(task, miniMessage);
@@ -136,7 +136,7 @@ public final class SubCommandList extends Command {
     }
 
     private String fixTask(String original, MiniMessage miniMessage) {
-        if(!original.contains("&") && !original.contains("\u00A7")) {
+        if (!original.contains("&") && !original.contains("\u00A7")) {
             return original;
         }
 
