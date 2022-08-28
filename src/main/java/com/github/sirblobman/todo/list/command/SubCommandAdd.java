@@ -65,14 +65,14 @@ public final class SubCommandAdd extends Command {
             setGlobalToDoList(globalToDoList);
 
             Replacer replacer = new SimpleReplacer("{task}", newItem);
-            sendMessage(sender, "to-do-list.add-task", replacer, true);
+            sendMessage(sender, "to-do-list.add-task", replacer);
             return true;
         }
 
         if(sub.equals("self")) {
             if(!(sender instanceof Player)) {
                 LanguageManager languageManager = getLanguageManager();
-                languageManager.sendMessage(sender, "error.not-player", null, true);
+                languageManager.sendMessage(sender, "error.not-player", null);
                 return true;
             }
 
@@ -82,7 +82,7 @@ public final class SubCommandAdd extends Command {
             setSelfToDoList(player, selfToDoList);
 
             Replacer replacer = new SimpleReplacer("{task}", newItem);
-            sendMessage(sender, "to-do-list.add-task", replacer, true);
+            sendMessage(sender, "to-do-list.add-task", replacer);
             return true;
         }
 

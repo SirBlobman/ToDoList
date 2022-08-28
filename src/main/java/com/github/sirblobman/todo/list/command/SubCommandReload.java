@@ -24,7 +24,7 @@ public final class SubCommandReload extends Command {
         JavaPlugin plugin = getPlugin();
         plugin.reloadConfig();
 
-        sendMessage(sender, "to-do-list.reload-success", null,true);
+        sendMessage(sender, "to-do-list.reload-success", null);
         return true;
     }
 }

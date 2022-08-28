@@ -63,7 +63,7 @@ public final class SubCommandComplete extends Command {
         int index = (indexBig.intValue() - 1);
         if(index < 0) {
             Replacer replacer = new SimpleReplacer("{value}", args[1]);
-            sendMessage(sender, "error.number-too-small", replacer, true);
+            sendMessage(sender, "error.number-too-small", replacer);
             return true;
         }
 
@@ -77,7 +77,7 @@ public final class SubCommandComplete extends Command {
             int globalToDoListSize = globalToDoList.size();
             if(index >= globalToDoListSize) {
                 Replacer replacer = new SimpleReplacer("{value}", args[1]);
-                sendMessage(sender, "error.number-too-big", replacer, true);
+                sendMessage(sender, "error.number-too-big", replacer);
                 return true;
             }
 
@@ -85,13 +85,13 @@ public final class SubCommandComplete extends Command {
             setGlobalToDoList(globalToDoList);
 
             Replacer replacer = new SimpleReplacer("{task}", completedTask);
-            sendMessage(sender, "to-do-list.complete-task", replacer, true);
+            sendMessage(sender, "to-do-list.complete-task", replacer);
             return true;
         }
 
         if(sub.equals("self")) {
             if(!(sender instanceof Player)) {
-                sendMessage(sender, "error.not-player", null, true);
+                sendMessage(sender, "error.not-player", null);
                 return true;
             }
 
@@ -100,7 +100,7 @@ public final class SubCommandComplete extends Command {
             int selfToDoListSize = selfToDoList.size();
             if(index >= selfToDoListSize) {
                 Replacer replacer = new SimpleReplacer("{value}", args[1]);
-                sendMessage(sender, "error.number-too-big", replacer, true);
+                sendMessage(sender, "error.number-too-big", replacer);
                 return true;
             }
 
@@ -108,7 +108,7 @@ public final class SubCommandComplete extends Command {
             setSelfToDoList(player, selfToDoList);
 
             Replacer replacer = new SimpleReplacer("{task}", completedTask);
-            sendMessage(sender, "to-do-list.complete-task", replacer, true);
+            sendMessage(sender, "to-do-list.complete-task", replacer);
             return true;
         }
 

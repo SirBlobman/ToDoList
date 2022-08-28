@@ -20,7 +20,7 @@ public final class SubCommandHelp extends Command {
 
     @Override
     protected boolean execute(CommandSender sender, String[] args) {
-        sendMessage(sender, "to-do-list.command-help", null,true);
+        sendMessage(sender, "to-do-list.command-help", null);
         return true;
     }
 }

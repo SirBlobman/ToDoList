@@ -10,9 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import com.github.sirblobman.api.adventure.adventure.text.Component;
+import com.github.sirblobman.api.adventure.adventure.text.minimessage.MiniMessage;
 import com.github.sirblobman.api.command.Command;
 import com.github.sirblobman.api.configuration.ConfigurationManager;
 import com.github.sirblobman.api.configuration.PlayerDataManager;
+import com.github.sirblobman.api.language.ComponentHelper;
 import com.github.sirblobman.api.language.LanguageManager;
 import com.github.sirblobman.api.utility.MessageUtility;
 import com.github.sirblobman.todo.list.ToDoListPlugin;
@@ -62,7 +65,7 @@ public final class SubCommandList extends Command {
 
         if(sub.equals("self")) {
             if(!(sender instanceof Player)) {
-                sendMessage(sender, "error.not-player", null, true);
+                sendMessage(sender, "error.not-player", null);
                 return true;
             }
 
@@ -102,31 +105,43 @@ public final class SubCommandList extends Command {
     }
 
     private void sendToDoList(CommandSender sender, List<String> taskList) {
-        LanguageManager languageManager = getLanguageManager();
         if(taskList.isEmpty()) {
-            sendMessage(sender, "to-do-list.empty-list", null, true);
+            sendMessage(sender, "to-do-list.empty-list", null);
             return;
         }
 
-        String titleFormat = languageManager.getMessage(sender, "to-do-list.title-format", null,
-                true);
+        LanguageManager languageManager = getLanguageManager();
+        MiniMessage miniMessage = languageManager.getMiniMessage();
+
+        String titleFormat = languageManager.getMessageString(sender, "to-do-list.title-format", null);
         List<String> messageList = new ArrayList<>();
         messageList.add(titleFormat);
 
         int taskListSize = taskList.size();
-        String taskFormat = languageManager.getMessage(sender, "to-do-list.task-format", null,
-                true);
+        String taskFormat = languageManager.getMessageString(sender, "to-do-list.task-format", null);
         for(int index = 0; index < taskListSize; index++) {
             String numberString = Integer.toString(index + 1);
             String task = taskList.get(index);
-            String taskColored = MessageUtility.color(task);
+            String fixTask = fixTask(task, miniMessage);
 
             String taskFormatted = taskFormat.replace("{number}", numberString)
-                    .replace("{task}", taskColored);
+                    .replace("{task}", fixTask);
             messageList.add(taskFormatted);
         }
 
-        String[] messageArray = messageList.toArray(new String[0]);
-        sender.sendMessage(messageArray);
+        for (String messageString : messageList) {
+            Component message = miniMessage.deserialize(messageString);
+            languageManager.sendMessage(sender, message);
+        }
+    }
+
+    private String fixTask(String original, MiniMessage miniMessage) {
+        if(!original.contains("&") && !original.contains("\u00A7")) {
+            return original;
+        }
+
+        String legacy = MessageUtility.color(original);
+        Component component = ComponentHelper.toComponent(legacy);
+        return miniMessage.serialize(component);
     }
 }

@@ -8,7 +8,7 @@ version: "${bukkit.plugin.version}"
 api-version: "1.13"
 
 depend:
-  - "SirBlobmanCore"
+  - "BlueSlimeCore"
 
 authors:
   - "SirBlobman"
@@ -16,7 +16,6 @@ authors:
 commands:
   to-do-list:
     description: "Main command for the To-Do List plugin."
-    permission: "to-do-list.command.to-do-list"
     usage: "/<command> help"
     aliases:
       - "todo"
