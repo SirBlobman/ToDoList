@@ -24,7 +24,7 @@ public final class SubCommandComplete extends Command {
     private final ToDoListPlugin plugin;
 
     public SubCommandComplete(ToDoListPlugin plugin) {
-        super(plugin, "add");
+        super(plugin, "complete");
         this.plugin = plugin;
     }
 
