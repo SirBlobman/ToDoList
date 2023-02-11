@@ -27,6 +27,9 @@ public final class ToDoListPlugin extends ConfigurablePlugin {
     public void onEnable() {
         reloadConfig();
 
+        LanguageManager languageManager = getLanguageManager();
+        languageManager.onPluginEnable();
+
         registerCommands();
         registerUpdateChecker();
         registerbStats();
@@ -44,7 +47,7 @@ public final class ToDoListPlugin extends ConfigurablePlugin {
         configurationManager.reload("global.yml");
 
         LanguageManager languageManager = getLanguageManager();
-        languageManager.reloadLanguageFiles();
+        languageManager.reloadLanguages();
     }
 
     private void registerCommands() {
@@ -65,6 +68,6 @@ public final class ToDoListPlugin extends ConfigurablePlugin {
     private String getDefaultLanguageCode() {
         LanguageManager languageManager = getLanguageManager();
         Language defaultLanguage = languageManager.getDefaultLanguage();
-        return (defaultLanguage == null ? "none" : defaultLanguage.getLanguageCode());
+        return (defaultLanguage == null ? "none" : defaultLanguage.getLanguageName());
     }
 }

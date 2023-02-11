@@ -14,8 +14,8 @@ import com.github.sirblobman.api.command.Command;
 import com.github.sirblobman.api.configuration.ConfigurationManager;
 import com.github.sirblobman.api.configuration.PlayerDataManager;
 import com.github.sirblobman.api.language.LanguageManager;
-import com.github.sirblobman.api.language.Replacer;
-import com.github.sirblobman.api.language.SimpleReplacer;
+import com.github.sirblobman.api.language.replacer.Replacer;
+import com.github.sirblobman.api.language.replacer.StringReplacer;
 import com.github.sirblobman.todo.list.ToDoListPlugin;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +25,7 @@ public final class SubCommandComplete extends Command {
 
     public SubCommandComplete(ToDoListPlugin plugin) {
         super(plugin, "complete");
+        setPermissionName("to-do-list.command.to-do-list.complete");
         this.plugin = plugin;
     }
 
@@ -62,7 +63,7 @@ public final class SubCommandComplete extends Command {
 
         int index = (indexBig.intValue() - 1);
         if (index < 0) {
-            Replacer replacer = new SimpleReplacer("{value}", args[1]);
+            Replacer replacer = new StringReplacer("{value}", args[1]);
             sendMessage(sender, "error.number-too-small", replacer);
             return true;
         }
@@ -76,7 +77,7 @@ public final class SubCommandComplete extends Command {
             List<String> globalToDoList = getGlobalToDoList();
             int globalToDoListSize = globalToDoList.size();
             if (index >= globalToDoListSize) {
-                Replacer replacer = new SimpleReplacer("{value}", args[1]);
+                Replacer replacer = new StringReplacer("{value}", args[1]);
                 sendMessage(sender, "error.number-too-big", replacer);
                 return true;
             }
@@ -84,14 +85,14 @@ public final class SubCommandComplete extends Command {
             String completedTask = globalToDoList.remove(index);
             setGlobalToDoList(globalToDoList);
 
-            Replacer replacer = new SimpleReplacer("{task}", completedTask);
+            Replacer replacer = new StringReplacer("{task}", completedTask);
             sendMessage(sender, "to-do-list.complete-task", replacer);
             return true;
         }
 
         if (sub.equals("self")) {
             if (!(sender instanceof Player)) {
-                sendMessage(sender, "error.not-player", null);
+                sendMessage(sender, "error.not-player");
                 return true;
             }
 
@@ -99,7 +100,7 @@ public final class SubCommandComplete extends Command {
             List<String> selfToDoList = getSelfToDoList(player);
             int selfToDoListSize = selfToDoList.size();
             if (index >= selfToDoListSize) {
-                Replacer replacer = new SimpleReplacer("{value}", args[1]);
+                Replacer replacer = new StringReplacer("{value}", args[1]);
                 sendMessage(sender, "error.number-too-big", replacer);
                 return true;
             }
@@ -107,7 +108,7 @@ public final class SubCommandComplete extends Command {
             String completedTask = selfToDoList.remove(index);
             setSelfToDoList(player, selfToDoList);
 
-            Replacer replacer = new SimpleReplacer("{task}", completedTask);
+            Replacer replacer = new StringReplacer("{task}", completedTask);
             sendMessage(sender, "to-do-list.complete-task", replacer);
             return true;
         }

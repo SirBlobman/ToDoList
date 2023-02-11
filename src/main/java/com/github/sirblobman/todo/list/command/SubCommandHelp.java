@@ -11,6 +11,7 @@ import com.github.sirblobman.todo.list.ToDoListPlugin;
 public final class SubCommandHelp extends Command {
     public SubCommandHelp(ToDoListPlugin plugin) {
         super(plugin, "help");
+        setPermissionName("to-do-list.command.to-do-list.help");
     }
 
     @Override
@@ -20,7 +21,7 @@ public final class SubCommandHelp extends Command {
 
     @Override
     protected boolean execute(CommandSender sender, String[] args) {
-        sendMessage(sender, "to-do-list.command-help", null);
+        sendMessage(sender, "to-do-list.command-help");
         return true;
     }
 }

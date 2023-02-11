@@ -13,8 +13,8 @@ import com.github.sirblobman.api.command.Command;
 import com.github.sirblobman.api.configuration.ConfigurationManager;
 import com.github.sirblobman.api.configuration.PlayerDataManager;
 import com.github.sirblobman.api.language.LanguageManager;
-import com.github.sirblobman.api.language.Replacer;
-import com.github.sirblobman.api.language.SimpleReplacer;
+import com.github.sirblobman.api.language.replacer.Replacer;
+import com.github.sirblobman.api.language.replacer.StringReplacer;
 import com.github.sirblobman.todo.list.ToDoListPlugin;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +24,7 @@ public final class SubCommandAdd extends Command {
 
     public SubCommandAdd(ToDoListPlugin plugin) {
         super(plugin, "add");
+        setPermissionName("to-do-list.command.to-do-list.add");
         this.plugin = plugin;
     }
 
@@ -64,7 +65,7 @@ public final class SubCommandAdd extends Command {
             globalToDoList.add(newItem);
             setGlobalToDoList(globalToDoList);
 
-            Replacer replacer = new SimpleReplacer("{task}", newItem);
+            Replacer replacer = new StringReplacer("{task}", newItem);
             sendMessage(sender, "to-do-list.add-task", replacer);
             return true;
         }
@@ -72,7 +73,7 @@ public final class SubCommandAdd extends Command {
         if (sub.equals("self")) {
             if (!(sender instanceof Player)) {
                 LanguageManager languageManager = getLanguageManager();
-                languageManager.sendMessage(sender, "error.not-player", null);
+                languageManager.sendMessage(sender, "error.not-player");
                 return true;
             }
 
@@ -81,7 +82,7 @@ public final class SubCommandAdd extends Command {
             selfToDoList.add(newItem);
             setSelfToDoList(player, selfToDoList);
 
-            Replacer replacer = new SimpleReplacer("{task}", newItem);
+            Replacer replacer = new StringReplacer("{task}", newItem);
             sendMessage(sender, "to-do-list.add-task", replacer);
             return true;
         }

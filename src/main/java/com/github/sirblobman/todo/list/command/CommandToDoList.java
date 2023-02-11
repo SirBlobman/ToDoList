@@ -12,6 +12,7 @@ public final class CommandToDoList extends Command {
     public CommandToDoList(ToDoListPlugin plugin) {
         super(plugin, "to-do-list");
         setPermissionName("to-do-list.command.to-do-list");
+
         addSubCommand(new SubCommandAdd(plugin));
         addSubCommand(new SubCommandComplete(plugin));
         addSubCommand(new SubCommandHelp(plugin));
@@ -26,7 +27,7 @@ public final class CommandToDoList extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        sendMessage(sender, "to-do-list.command-help", null);
+        sendMessage(sender, "to-do-list.command-help");
         return true;
     }
 }

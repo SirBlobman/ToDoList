@@ -12,6 +12,7 @@ import com.github.sirblobman.todo.list.ToDoListPlugin;
 public final class SubCommandReload extends Command {
     public SubCommandReload(ToDoListPlugin plugin) {
         super(plugin, "reload");
+        setPermissionName("to-do-list.command.to-do-list.reload");
     }
 
     @Override
@@ -24,7 +25,7 @@ public final class SubCommandReload extends Command {
         JavaPlugin plugin = getPlugin();
         plugin.reloadConfig();
 
-        sendMessage(sender, "to-do-list.reload-success", null);
+        sendMessage(sender, "to-do-list.reload-success");
         return true;
     }
 }

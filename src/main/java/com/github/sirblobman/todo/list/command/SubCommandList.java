@@ -27,6 +27,7 @@ public final class SubCommandList extends Command {
 
     public SubCommandList(ToDoListPlugin plugin) {
         super(plugin, "list");
+        setPermissionName("to-do-list.command.to-do-list.list");
         this.plugin = plugin;
     }
 
@@ -65,7 +66,7 @@ public final class SubCommandList extends Command {
 
         if (sub.equals("self")) {
             if (!(sender instanceof Player)) {
-                sendMessage(sender, "error.not-player", null);
+                sendMessage(sender, "error.not-player");
                 return true;
             }
 
@@ -106,19 +107,19 @@ public final class SubCommandList extends Command {
 
     private void sendToDoList(CommandSender sender, List<String> taskList) {
         if (taskList.isEmpty()) {
-            sendMessage(sender, "to-do-list.empty-list", null);
+            sendMessage(sender, "to-do-list.empty-list");
             return;
         }
 
         LanguageManager languageManager = getLanguageManager();
         MiniMessage miniMessage = languageManager.getMiniMessage();
 
-        String titleFormat = languageManager.getMessageString(sender, "to-do-list.title-format", null);
+        String titleFormat = languageManager.getMessageString(sender, "to-do-list.title-format");
         List<String> messageList = new ArrayList<>();
         messageList.add(titleFormat);
 
         int taskListSize = taskList.size();
-        String taskFormat = languageManager.getMessageString(sender, "to-do-list.task-format", null);
+        String taskFormat = languageManager.getMessageString(sender, "to-do-list.task-format");
         for (int index = 0; index < taskListSize; index++) {
             String numberString = Integer.toString(index + 1);
             String task = taskList.get(index);
@@ -135,6 +136,7 @@ public final class SubCommandList extends Command {
         }
     }
 
+    @SuppressWarnings("UnnecessaryUnicodeEscape")
     private String fixTask(String original, MiniMessage miniMessage) {
         if (!original.contains("&") && !original.contains("\u00A7")) {
             return original;
