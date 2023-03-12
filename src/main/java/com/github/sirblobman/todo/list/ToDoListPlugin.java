@@ -32,7 +32,7 @@ public final class ToDoListPlugin extends ConfigurablePlugin {
 
         registerCommands();
         registerUpdateChecker();
-        registerbStats();
+        register_bStats();
     }
 
     @Override
@@ -60,7 +60,7 @@ public final class ToDoListPlugin extends ConfigurablePlugin {
         updateManager.addResource(this, 61183L);
     }
 
-    private void registerbStats() {
+    private void register_bStats() {
         Metrics metrics = new Metrics(this, 16289);
         metrics.addCustomChart(new SimplePie("selected_language", this::getDefaultLanguageCode));
     }

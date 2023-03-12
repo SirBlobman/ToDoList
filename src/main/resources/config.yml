@@ -1,5 +1,4 @@
-# Configuration File for ${bukkit.plugin.prefix}
-# Made by ${bukkit.plugin.author} for v${bukkit.plugin.version}
+# Configuration File for ${pluginPrefix} v${pluginVersion}
 
 # The global to-do list can be found in 'global.yml'
 global-list:
