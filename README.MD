@@ -1,5 +1,17 @@
 # To-Do List
+
 To-Do List is a plugin that lets you keep a list of things you need to do.
+
+## Requirements
+
+- Java 8
+- [BlueSlimeCore](https://hangar.papermc.io/SirBlobman/BlueSlimeCore) 2.9.0
+- [Spigot](https://www.spigotmc.org/), [Paper](https://papermc.io/downloads/paper), or [Folia](https://papermc.io/software/folia) 1.8.8-1.19.4
+
+## Downloads
+
+- [SpigotMC](https://www.spigotmc.org/resources/61183/)
+- [Jenkins Beta Builds](https://jenkins.sirblobman.xyz/job/SirBlobman/job/ToDoList/job/main/)
 
 ## Commands
 | Command                                         | Permission                             | Description                                   |
