@@ -53,15 +53,27 @@ java {
 
 tasks {
     named<Jar>("jar") {
-        archiveFileName.set("ToDoList-$calculatedVersion.jar")
+        archiveBaseName.set("ToDoList")
+    }
+
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        options.compilerArgs.add("-Xlint:deprecation")
+        options.compilerArgs.add("-Xlint:unchecked")
+    }
+
+    withType<Javadoc> {
+        options.encoding = "UTF-8"
+        val standardOptions = options as StandardJavadocDocletOptions
+        standardOptions.addStringOption("Xdoclint:none", "-quiet")
     }
 
     processResources {
-        val pluginName = (findProperty("bukkit.plugin.name") ?: "") as String
-        val pluginPrefix = (findProperty("bukkit.plugin.prefix") ?: "") as String
-        val pluginDescription = (findProperty("bukkit.plugin.description") ?: "") as String
-        val pluginWebsite = (findProperty("bukkit.plugin.website") ?: "") as String
-        val pluginMainClass = (findProperty("bukkit.plugin.main") ?: "") as String
+        val pluginName = fetchProperty("bukkit.plugin.name", "")
+        val pluginPrefix = fetchProperty("bukkit.plugin.prefix", "")
+        val pluginDescription = fetchProperty("bukkit.plugin.description", "")
+        val pluginWebsite = fetchProperty("bukkit.plugin.website", "")
+        val pluginMainClass = fetchProperty("bukkit.plugin.main", "")
 
         filesMatching("plugin.yml") {
             expand(mapOf(
@@ -70,14 +82,14 @@ tasks {
                 "pluginDescription" to pluginDescription,
                 "pluginWebsite" to pluginWebsite,
                 "pluginMainClass" to pluginMainClass,
-                "pluginVersion" to calculatedVersion
+                "pluginVersion" to version
             ))
         }
 
         filesMatching("config.yml") {
             expand(mapOf(
                 "pluginPrefix" to pluginPrefix,
-                "pluginVersion" to calculatedVersion
+                "pluginVersion" to version
             ))
         }
     }
