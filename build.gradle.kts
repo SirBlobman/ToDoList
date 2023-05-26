@@ -1,10 +1,32 @@
-val baseVersion = findProperty("version.base") ?: "invalid"
-val betaString = ((findProperty("version.beta") ?: "false") as String)
-val jenkinsBuildNumber = System.getenv("BUILD_NUMBER") ?: "Unofficial"
+val baseVersion = fetchProperty("version.base", "invalid")
+val betaString = fetchProperty("version.beta", "false")
+val jenkinsBuildNumber = fetchEnv("BUILD_NUMBER", null, "Unofficial")
 
 val betaBoolean = betaString.toBoolean()
 val betaVersion = if (betaBoolean) "Beta-" else ""
-val calculatedVersion = "$baseVersion.$betaVersion$jenkinsBuildNumber"
+version = "$baseVersion.$betaVersion$jenkinsBuildNumber"
+
+fun fetchProperty(propertyName: String, defaultValue: String): String {
+    val found = findProperty(propertyName)
+    if (found != null) {
+        return found.toString()
+    }
+
+    return defaultValue
+}
+
+fun fetchEnv(envName: String, propertyName: String?, defaultValue: String): String {
+    val found = System.getenv(envName)
+    if (found != null) {
+        return found
+    }
+
+    if (propertyName != null) {
+        return fetchProperty(propertyName, defaultValue)
+    }
+
+    return defaultValue
+}
 
 plugins {
     id("java")
@@ -13,14 +35,14 @@ plugins {
 repositories {
     mavenCentral()
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://nexus.sirblobman.xyz/public/")
 }
 
 dependencies {
     compileOnly("org.jetbrains:annotations:24.0.1")
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("com.github.sirblobman.api:core:2.7-SNAPSHOT")
+    compileOnly("com.github.sirblobman.api:core:2.9-SNAPSHOT")
 }
 
 java {
